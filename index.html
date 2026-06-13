@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courseverse - AI-Powered E-Learning Platform</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎓</text></svg>">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-graduation-cap"></i> Courseverse
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="courses.html" class="nav-link">Courses</a></li>
+                <li><a href="subscription.html" class="nav-link">Subscription</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <form action="courses.html" method="GET" class="nav-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" name="search" placeholder="Search courses...">
+                </form>
+
+                <!-- Membership status & Action -->
+                <div id="nav-membership-section" class="nav-actions">
+                    <!-- Injected dynamically by main.js -->
+                </div>
+
+                <a href="dashboard.html" class="profile-avatar" style="width: 38px; height: 38px; font-size: 14px;">R</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container hero-grid">
+                <div class="hero-text animate-fade">
+                    <h1>Learn Faster, Think Smarter with <span>AI Tutor</span></h1>
+                    <p>Courseverse combines Coursera's structured curriculum with real-time AI Study Companions. Ask questions, generate instant quizzes, and acquire verified skills.</p>
+                    
+                    <div class="hero-cta">
+                        <a href="courses.html" class="btn btn-primary btn-lg">Browse Courses</a>
+                        <button id="hero-premium-btn" onclick="openUpgradeModal()" class="btn btn-secondary btn-lg btn-premium-text">
+                            <i class="fa-solid fa-crown"></i> Go Premium
+                        </button>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">15K+</span>
+                            <span class="stat-label">Active Learners</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">AI Supported</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Expert Categories</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual animate-fade" style="animation-delay: 0.15s;">
+                    <div class="premium-card">
+                        <div class="card-header-badge">
+                            <span class="card-badge"><i class="fa-solid fa-brain"></i> AI Companion</span>
+                            <div class="ai-pulse-indicator">
+                                <div class="ai-pulse-dot"></div>
+                                <span>Active Tutor</span>
+                            </div>
+                        </div>
+                        <h3 style="font-size: 18px; margin-bottom: 12px;">Active Lesson: Python Variables</h3>
+                        
+                        <div style="background: rgba(0, 0, 0, 0.2); border-radius: 8px; padding: 12px; margin-bottom: 16px; font-size: 13px;">
+                            <div style="color: var(--accent-cyan); font-weight: 600; margin-bottom: 4px;">User:</div>
+                            <div style="color: var(--text-secondary); margin-bottom: 12px;">What does 'dynamic typing' mean?</div>
+                            
+                            <div style="color: var(--accent-indigo); font-weight: 600; margin-bottom: 4px;">AI Tutor:</div>
+                            <div style="color: var(--text-primary);">It means you don't need to specify variable types in Python. For example: <code style="color: var(--accent-cyan);">x = 5</code> is automatically an Integer!</div>
+                        </div>
+
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <span style="font-size: 12px; color: var(--text-muted);">Tutor status:</span>
+                            <span class="typing-indicator">
+                                <span class="typing-dot"></span>
+                                <span class="typing-dot"></span>
+                                <span class="typing-dot"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Spotlight -->
+        <section class="features-section">
+            <div class="container">
+                <div class="section-header animate-fade">
+                    <h2>Why Learn with Courseverse?</h2>
+                    <p>Our platform pairs standard industry-validated courses with advanced machine learning tools to create an immersive, personalized study experience.</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-box animate-fade" style="animation-delay: 0.1s;">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-comments"></i>
+                        </div>
+                        <h3>AI Study Companion</h3>
+                        <p>A dedicated tutor on every lecture screen. Ask questions, clarify definitions, and request summaries instantly as you watch or read.</p>
+                    </div>
+
+                    <div class="feature-box animate-fade" style="animation-delay: 0.2s;">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h3>Smart Quiz Generator</h3>
+                        <p>Never memorize blindly. Click to generate custom, context-specific multiple choice quizzes to test your memory, complete with explanations.</p>
+                    </div>
+
+                    <div class="feature-box animate-fade" style="animation-delay: 0.3s;">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <h3>Dynamic Progress Tracking</h3>
+                        <p>Keep track of completed modules and quiz scores. Graduate each course to earn a shareable, digital completion certificate.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Courses Section -->
+        <section class="course-grid-container">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Start Learning Today</h2>
+                    <p>Select from our hand-picked initial curriculum. Get immediate hands-on practice with coding, AI, and design theories.</p>
+                </div>
+
+                <div class="course-grid">
+                    <!-- Course 1 -->
+                    <div class="course-card">
+                        <div class="course-banner">
+                            <span class="course-badge-free">Free</span>
+                            <i class="fa-brands fa-python"></i>
+                        </div>
+                        <div class="course-body">
+                            <span class="course-category">Coding</span>
+                            <h3>Introduction to Python Programming</h3>
+                            <p>Master the fundamentals of Python, the most popular programming language in the world.</p>
+                            <div class="course-meta">
+                                <span><i class="fa-solid fa-clock"></i> 4 Weeks</span>
+                                <span><i class="fa-solid fa-layer-group"></i> Beginner</span>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <a href="course_detail.html?course=python-101&lesson=py-vars" class="btn btn-primary">Start Learning</a>
+                        </div>
+                    </div>
+
+                    <!-- Course 2 -->
+                    <div class="course-card" id="card-ai">
+                        <div class="course-banner">
+                            <span class="course-badge-premium"><i class="fa-solid fa-crown"></i> Premium</span>
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <div class="course-body">
+                            <span class="course-category">AI</span>
+                            <h3>AI & Machine Learning Foundations</h3>
+                            <p>Dive into the core mathematical concepts and algorithms behind modern artificial intelligence.</p>
+                            <div class="course-meta">
+                                <span><i class="fa-solid fa-clock"></i> 6 Weeks</span>
+                                <span><i class="fa-solid fa-layer-group"></i> Intermediate</span>
+                            </div>
+                        </div>
+                        <div class="course-footer" id="footer-ai">
+                            <!-- Populated dynamically by script below -->
+                        </div>
+                    </div>
+
+                    <!-- Course 3 -->
+                    <div class="course-card" id="card-design">
+                        <div class="course-banner">
+                            <span class="course-badge-premium"><i class="fa-solid fa-crown"></i> Premium</span>
+                            <i class="fa-solid fa-palette"></i>
+                        </div>
+                        <div class="course-body">
+                            <span class="course-category">Design</span>
+                            <h3>UI/UX Design Masterclass</h3>
+                            <p>Learn the principles of human-centered design to craft intuitive, beautiful digital interfaces.</p>
+                            <div class="course-meta">
+                                <span><i class="fa-solid fa-clock"></i> 5 Weeks</span>
+                                <span><i class="fa-solid fa-layer-group"></i> All Levels</span>
+                            </div>
+                        </div>
+                        <div class="course-footer" id="footer-design">
+                            <!-- Populated dynamically by script below -->
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 48px;">
+                    <a href="courses.html" class="btn btn-secondary btn-lg">View All Courses <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Unified Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div>
+                <p>&copy; 2024 Courseverse. Built by Ria Chawak. Powered by Artificial Intelligence.</p>
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Designed for maximum visual and educational impact.</p>
+            </div>
+            <div class="footer-links">
+                <a href="courses.html">Browse Catalog</a>
+                <a href="subscription.html">Upgrade Membership</a>
+                <a href="#" onclick="resetSubscription(event)" style="color: var(--error);"><i class="fa-solid fa-arrows-rotate"></i> Reset State</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Universal Checkout Upgrade Modal -->
+    <div id="checkout-modal" class="modal-overlay">
+        <div class="modal-box">
+            <button onclick="closeUpgradeModal()" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div id="checkout-modal-form">
+                <div class="modal-header">
+                    <i class="fa-solid fa-gem"></i>
+                    <h2>Upgrade to Courseverse Premium</h2>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-top: 6px;">Unlock all AI features, certificate tracks, and premium syllabus details.</p>
+                </div>
+
+                <div class="checkout-details">
+                    <div class="detail-row">
+                        <span>Plan Type</span>
+                        <span style="font-weight: 600;">Premium Pro Membership</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Duration</span>
+                        <span>Monthly Recurring</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Price</span>
+                        <span style="color: var(--accent-premium); font-weight: 700;">$19.99 / mo</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <button onclick="confirmUpgrade(event)" class="btn btn-premium btn-lg" style="width: 100%;">
+                        <i class="fa-solid fa-lock-open"></i> Secure Unlock Now
+                    </button>
+                    <p style="font-size: 11px; text-align: center; color: var(--text-muted);">
+                        This is a simulated secure check-out. Clicking will instantly upgrade your session locally.
+                    </p>
+                </div>
+            </div>
+
+            <div id="checkout-success-view" class="upgrade-success-anim">
+                <i class="fa-solid fa-circle-check animate-fade"></i>
+                <h2>Welcome to Premium!</h2>
+                <p style="color: var(--text-secondary); margin-top: 10px; font-size: 14px; margin-bottom: 24px;">
+                    Your account has been upgraded. You now have full access to all interactive AI tutors, quizzes, and certificates.
+                </p>
+                <button onclick="closeUpgradeSuccess()" class="btn btn-secondary" style="width: 100%;">Let's Learn</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const isPremium = localStorage.getItem("is_premium") === "true";
+            
+            // Adjust hero premium action
+            const heroPremiumBtn = document.getElementById("hero-premium-btn");
+            if (isPremium && heroPremiumBtn) {
+                heroPremiumBtn.outerHTML = `<a href="dashboard.html" class="btn btn-secondary btn-lg">View Dashboard</a>`;
+            }
+
+            // Adjust AI Card Footer
+            const footerAi = document.getElementById("footer-ai");
+            if (isPremium) {
+                footerAi.innerHTML = `<a href="course_detail.html?course=ai-ml-basics&lesson=ai-intro" class="btn btn-primary">Start Learning</a>`;
+            } else {
+                footerAi.innerHTML = `<button onclick="openUpgradeModal()" class="btn btn-secondary"><i class="fa-solid fa-lock"></i> Unlock Premium</button>`;
+            }
+
+            // Adjust Design Card Footer
+            const footerDesign = document.getElementById("footer-design");
+            if (isPremium) {
+                footerDesign.innerHTML = `<a href="course_detail.html?course=design-101&lesson=ds-thinking" class="btn btn-primary">Start Learning</a>`;
+            } else {
+                footerDesign.innerHTML = `<button onclick="openUpgradeModal()" class="btn btn-secondary"><i class="fa-solid fa-lock"></i> Unlock Premium</button>`;
+            }
+        });
+    </script>
+</body>
+</html>

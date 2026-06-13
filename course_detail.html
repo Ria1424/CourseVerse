@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Player - Courseverse</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎓</text></svg>">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container nav-container" style="height: 72px;">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-graduation-cap"></i> Courseverse
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="courses.html" class="nav-link">Courses</a></li>
+                <li><a href="subscription.html" class="nav-link">Subscription</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <form action="courses.html" method="GET" class="nav-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" name="search" placeholder="Search courses...">
+                </form>
+
+                <!-- Membership status & Action -->
+                <div id="nav-membership-section" class="nav-actions">
+                    <!-- Injected dynamically by main.js -->
+                </div>
+
+                <a href="dashboard.html" class="profile-avatar" style="width: 38px; height: 38px; font-size: 14px;">R</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="main-content">
+        <div class="course-player-container">
+            
+            <!-- LEFT PANEL: Course Outline Navigation -->
+            <aside class="player-outline">
+                <div class="outline-header">
+                    <h4 class="outline-title" id="player-course-title">Loading Course...</h4>
+                    <div class="outline-progress">
+                        <span id="completion-stats">0 of 0 completed</span>
+                    </div>
+                </div>
+
+                <ul class="outline-list" id="player-outline-list">
+                    <!-- Outlines injected dynamically by course.js -->
+                </ul>
+            </aside>
+
+            <!-- CENTER PANEL: Primary Learning Screen -->
+            <section class="player-screen animate-fade">
+                
+                <!-- Video Mock Player -->
+                <div class="video-mock-container">
+                    <div class="video-mock-overlay">
+                        <div class="video-play-btn">
+                            <i class="fa-solid fa-play" style="margin-left: 4px;"></i>
+                        </div>
+                        <h4 style="font-size: 16px;" id="player-video-title">Lecture Video</h4>
+                        <p style="font-size: 12px; color: var(--text-secondary);">Duration: ~12 minutes</p>
+                    </div>
+                </div>
+
+                <!-- Lesson Description Card -->
+                <div class="lesson-body">
+                    <div class="lesson-meta">
+                        <span class="course-category" id="player-lesson-category">Loading</span>
+                        <span style="font-size: 13px; color: var(--text-muted);">Syllabus Unit</span>
+                    </div>
+                    <h2 id="player-lesson-title">Loading Lesson Title</h2>
+                    <p id="player-lesson-content">Loading lesson body transcript details...</p>
+
+                    <!-- Code block placeholder -->
+                    <div id="player-code-container" style="display: none;">
+                        <h4 style="font-size: 15px; margin-top: 24px; margin-bottom: 8px;"><i class="fa-solid fa-terminal" style="color: var(--accent-indigo); margin-right: 6px;"></i> Interactive Code Example</h4>
+                        <pre class="lesson-code-block"><code id="player-code-block"># code example</code></pre>
+                </div>
+
+                <!-- Completion Toggle & Navigation -->
+                <div class="player-nav-controls">
+                    <!-- Complete Checkbox Button -->
+                    <button onclick="toggleLessonCompletionStatic()" id="complete-btn" class="btn btn-primary">
+                        <i class="fa-solid fa-circle" id="complete-btn-icon" style="margin-right: 6px;"></i>
+                        <span id="complete-btn-text">Mark Complete</span>
+                    </button>
+
+                    <!-- Back/Next Buttons -->
+                    <div style="display: flex; gap: 12px;">
+                        <button id="player-prev-btn" onclick="navigateLesson('prev')" class="btn btn-secondary" disabled><i class="fa-solid fa-chevron-left" style="margin-right: 6px;"></i> Prev</button>
+                        <button id="player-next-btn" onclick="navigateLesson('next')" class="btn btn-secondary" disabled>Next <i class="fa-solid fa-chevron-right" style="margin-left: 6px;"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RIGHT PANEL: AI Study Companion Sidebar -->
+            <aside class="player-ai-sidebar">
+                <div class="ai-sidebar-header">
+                    <i class="fa-solid fa-robot"></i>
+                    <h3>AI Study Companion <span class="status-dot"></span></h3>
+                </div>
+
+                <!-- Chat History -->
+                <div class="ai-chat-history" id="chat-history">
+                    <!-- Messages populated dynamically -->
+                </div>
+
+                <!-- Typing Indicator (Hidden by default) -->
+                <div id="ai-typing-indicator" class="ai-chat-history" style="display: none; padding: 10px 20px; flex-grow: 0; min-height: 0;">
+                    <div class="chat-bubble chat-bubble-ai" style="padding: 8px 12px; display: inline-flex; align-items: center; gap: 8px;">
+                        <span>AI Tutor thinking</span>
+                        <span class="typing-indicator">
+                            <span class="typing-dot"></span>
+                            <span class="typing-dot"></span>
+                            <span class="typing-dot"></span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Predefined Action Buttons -->
+                <div class="ai-quick-prompts">
+                    <button onclick="sendQuickPromptStatic('Summarize Lesson')" class="quick-prompt-btn"><i class="fa-solid fa-paragraph"></i> Summarize</button>
+                    <button onclick="sendQuickPromptStatic('Explain Concept')" class="quick-prompt-btn"><i class="fa-solid fa-lightbulb"></i> Explain Concept</button>
+                    <button onclick="sendQuickPromptStatic('Key Concepts')" class="quick-prompt-btn"><i class="fa-solid fa-key"></i> Key Vocabulary</button>
+                    <button onclick="triggerQuizGenerationStatic()" class="quick-prompt-btn" style="background: rgba(6, 182, 212, 0.1); border-color: rgba(6, 182, 212, 0.2); color: var(--accent-cyan); font-weight: 600;"><i class="fa-solid fa-clipboard-question"></i> Generate AI Quiz</button>
+                </div>
+
+                <!-- User Chat Input Bar -->
+                <div class="ai-chat-input-bar" id="ai-chat-input-container">
+                    <!-- Injected dynamically by course.js based on premium level -->
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- AI Dynamic Quiz Overlay Modal -->
+    <div id="quiz-modal" class="modal-overlay">
+        <div class="quiz-modal-box modal-box">
+            <button onclick="closeQuizModal()" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div id="quiz-loading-view" style="text-align: center; padding: 40px 0;">
+                <span class="typing-indicator" style="width: 60px; height: 20px; margin: 0 auto 16px auto;">
+                    <span class="typing-dot" style="width: 10px; height: 10px;"></span>
+                    <span class="typing-dot" style="width: 10px; height: 10px;"></span>
+                    <span class="typing-dot" style="width: 10px; height: 10px;"></span>
+                </span>
+                <h3>Formulating AI Assessment...</h3>
+                <p style="color: var(--text-secondary); font-size: 13px; margin-top: 6px;">Analyzing lesson transcript and preparing questions.</p>
+            </div>
+
+            <div id="quiz-content-view" style="display: none;">
+                <div class="quiz-progress-text">Question <span id="quiz-current-num">1</span> of <span id="quiz-total-num">3</span></div>
+                <div class="quiz-progress-bar-bg">
+                    <div class="quiz-progress-bar-fill" id="quiz-progress-bar"></div>
+                </div>
+
+                <div class="quiz-question-text" id="quiz-question">What is a python variable?</div>
+                
+                <div class="quiz-options-list" id="quiz-options">
+                    <!-- Options injected dynamically -->
+                </div>
+
+                <div class="quiz-explanation-box" id="quiz-explanation" style="display: none;">
+                    <strong>Explanation:</strong>
+                    <span id="quiz-explanation-text">...</span>
+                </div>
+
+                <button id="quiz-action-btn" onclick="submitAnswerStatic()" class="btn btn-primary" style="width: 100%;" disabled>Submit Answer</button>
+            </div>
+
+            <div id="quiz-result-view" class="quiz-result-view" style="display: none;">
+                <i class="fa-solid fa-circle-check"></i>
+                <h2>Assessment Complete!</h2>
+                <div class="quiz-result-score">Score: <span id="quiz-score-val">3</span>/<span id="quiz-score-total">3</span></div>
+                <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px;" id="quiz-result-feedback">...</p>
+                <button onclick="closeQuizModal()" class="btn btn-secondary" style="width: 100%;">Return to Lesson</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Universal Checkout Upgrade Modal -->
+    <div id="checkout-modal" class="modal-overlay">
+        <div class="modal-box">
+            <button onclick="closeUpgradeModal()" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div id="checkout-modal-form">
+                <div class="modal-header">
+                    <i class="fa-solid fa-gem"></i>
+                    <h2>Upgrade to Courseverse Premium</h2>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-top: 6px;">Unlock all AI features, certificate tracks, and premium syllabus details.</p>
+                </div>
+
+                <div class="checkout-details">
+                    <div class="detail-row">
+                        <span>Plan Type</span>
+                        <span style="font-weight: 600;">Premium Pro Membership</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Duration</span>
+                        <span>Monthly Recurring</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Price</span>
+                        <span style="color: var(--accent-premium); font-weight: 700;">$19.99 / mo</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <button onclick="confirmUpgrade(event)" class="btn btn-premium btn-lg" style="width: 100%;">
+                        <i class="fa-solid fa-lock-open"></i> Secure Unlock Now
+                    </button>
+                    <p style="font-size: 11px; text-align: center; color: var(--text-muted);">
+                        This is a simulated secure check-out. Clicking will instantly upgrade your session locally.
+                    </p>
+                </div>
+            </div>
+
+            <div id="checkout-success-view" class="upgrade-success-anim">
+                <i class="fa-solid fa-circle-check animate-fade"></i>
+                <h2>Welcome to Premium!</h2>
+                <p style="color: var(--text-secondary); margin-top: 10px; font-size: 14px; margin-bottom: 24px;">
+                    Your account has been upgraded. You now have full access to all interactive AI tutors, quizzes, and certificates.
+                </p>
+                <button onclick="closeUpgradeSuccess()" class="btn btn-secondary" style="width: 100%;">Let's Learn</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Unified Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div>
+                <p>&copy; 2024 Courseverse. Built by Ria Chawak. Powered by Artificial Intelligence.</p>
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Designed for maximum visual and educational impact.</p>
+            </div>
+            <div class="footer-links">
+                <a href="courses.html">Browse Catalog</a>
+                <a href="subscription.html">Upgrade Membership</a>
+                <a href="#" onclick="resetSubscription(event)" style="color: var(--error);"><i class="fa-solid fa-arrows-rotate"></i> Reset State</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/course.js"></script>
+</body>
+</html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Student Dashboard - Courseverse</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎓</text></svg>">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-graduation-cap"></i> Courseverse
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="courses.html" class="nav-link">Courses</a></li>
+                <li><a href="subscription.html" class="nav-link">Subscription</a></li>
+                <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <form action="courses.html" method="GET" class="nav-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" name="search" placeholder="Search courses...">
+                </form>
+
+                <!-- Membership status & Action -->
+                <div id="nav-membership-section" class="nav-actions">
+                    <!-- Injected dynamically by main.js -->
+                </div>
+
+                <a href="dashboard.html" class="profile-avatar" style="width: 38px; height: 38px; font-size: 14px;">R</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="container" style="padding: 60px 24px;">
+            <!-- Profile Card Header -->
+            <div class="profile-card animate-fade">
+                <div class="profile-info">
+                    <div class="profile-avatar">R</div>
+                    <div class="profile-meta">
+                        <h2>Ria</h2>
+                        <p style="color: var(--text-secondary); font-size: 14px;">Student Member since June 2026</p>
+                    </div>
+                </div>
+                <div id="profile-membership-action">
+                    <!-- Injected dynamically -->
+                </div>
+            </div>
+
+            <!-- Metrics Cards Row -->
+            <div class="metrics-row animate-fade" style="animation-delay: 0.1s;">
+                <div class="metric-card">
+                    <h4>Enrolled Tracks</h4>
+                    <div class="metric-val" id="metric-enrolled">0</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Lessons Finished</h4>
+                    <div class="metric-val" id="metric-finished">0</div>
+                </div>
+                <div class="metric-card">
+                    <h4>AI Quizzes Taken</h4>
+                    <div class="metric-val" id="metric-quizzes">0</div>
+                </div>
+                <div class="metric-card">
+                    <h4>Certificates Earned</h4>
+                    <div class="metric-val" id="metric-certificates" style="color: var(--accent-premium);">0</div>
+                </div>
+            </div>
+
+            <!-- Dashboard Content Split -->
+            <div class="dashboard-grid animate-fade" style="animation-delay: 0.15s;">
+                
+                <!-- Left: Course Progress Tracker -->
+                <div>
+                    <!-- AI Course Recommendations Section -->
+                    <div style="margin-bottom: 40px;">
+                        <h3 class="dashboard-list-title" style="border-left-color: var(--accent-cyan);">🧠 AI Personalized Recommendations</h3>
+                        <div id="recommendations-grid" class="course-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; display: grid;">
+                            <!-- Injected dynamically by JS -->
+                        </div>
+                    </div>
+
+                    <h3 class="dashboard-list-title">Active Learning Progress</h3>
+                    <div id="dashboard-enrolled-list" class="enrolled-list">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Right: Profile Interests & Credentials -->
+                <div style="display: flex; flex-direction: column; gap: 24px; align-self: flex-start;">
+                    <!-- Interests Checklist Card -->
+                    <div class="certificates-showcase" style="align-self: stretch; margin-bottom: 0;">
+                        <h3 style="font-size: 18px; margin-bottom: 12px;"><i class="fa-solid fa-sliders" style="color: var(--accent-cyan); margin-right: 6px;"></i> Profile Interests</h3>
+                        <p style="font-size: 11px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.4;">Select your subjects of interest to update AI course recommendations instantly.</p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <label style="display: flex; align-items: center; gap: 10px; font-size: 13px; cursor: pointer; color: var(--text-primary);">
+                                <input type="checkbox" class="interest-checkbox" value="Coding" onchange="updateInterestsStatic()" style="width: 16px; height: 16px; accent-color: var(--accent-cyan);"> Coding
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px; font-size: 13px; cursor: pointer; color: var(--text-primary);">
+                                <input type="checkbox" class="interest-checkbox" value="AI" onchange="updateInterestsStatic()" style="width: 16px; height: 16px; accent-color: var(--accent-cyan);"> Artificial Intelligence
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px; font-size: 13px; cursor: pointer; color: var(--text-primary);">
+                                <input type="checkbox" class="interest-checkbox" value="Design" onchange="updateInterestsStatic()" style="width: 16px; height: 16px; accent-color: var(--accent-cyan);"> UI/UX Design
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px; font-size: 13px; cursor: pointer; color: var(--text-primary);">
+                                <input type="checkbox" class="interest-checkbox" value="Business" onchange="updateInterestsStatic()" style="width: 16px; height: 16px; accent-color: var(--accent-cyan);"> Business
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Credentials Showcase -->
+                    <div class="certificates-showcase" style="align-self: stretch; margin-bottom: 0;">
+                        <h3 style="font-size: 20px; margin-bottom: 20px;"><i class="fa-solid fa-award" style="color: var(--accent-premium); margin-right: 6px;"></i> AI Credentials</h3>
+                        <div id="dashboard-certificates-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Unified Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div>
+                <p>&copy; 2024 Courseverse. Built by Ria Chawak. Powered by Artificial Intelligence.</p>
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Designed for maximum visual and educational impact.</p>
+            </div>
+            <div class="footer-links">
+                <a href="courses.html">Browse Catalog</a>
+                <a href="subscription.html">Upgrade Membership</a>
+                <a href="#" onclick="resetSubscription(event)" style="color: var(--error);"><i class="fa-solid fa-arrows-rotate"></i> Reset State</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Universal Checkout Upgrade Modal -->
+    <div id="checkout-modal" class="modal-overlay">
+        <div class="modal-box">
+            <button onclick="closeUpgradeModal()" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div id="checkout-modal-form">
+                <div class="modal-header">
+                    <i class="fa-solid fa-gem"></i>
+                    <h2>Upgrade to Courseverse Premium</h2>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-top: 6px;">Unlock all AI features, certificate tracks, and premium syllabus details.</p>
+                </div>
+
+                <div class="checkout-details">
+                    <div class="detail-row">
+                        <span>Plan Type</span>
+                        <span style="font-weight: 600;">Premium Pro Membership</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Duration</span>
+                        <span>Monthly Recurring</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Price</span>
+                        <span style="color: var(--accent-premium); font-weight: 700;">$19.99 / mo</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <button onclick="confirmUpgrade(event)" class="btn btn-premium btn-lg" style="width: 100%;">
+                        <i class="fa-solid fa-lock-open"></i> Secure Unlock Now
+                    </button>
+                    <p style="font-size: 11px; text-align: center; color: var(--text-muted);">
+                        This is a simulated secure check-out. Clicking will instantly upgrade your session locally.
+                    </p>
+                </div>
+            </div>
+
+            <div id="checkout-success-view" class="upgrade-success-anim">
+                <i class="fa-solid fa-circle-check animate-fade"></i>
+                <h2>Welcome to Premium!</h2>
+                <p style="color: var(--text-secondary); margin-top: 10px; font-size: 14px; margin-bottom: 24px;">
+                    Your account has been upgraded. You now have full access to all interactive AI tutors, quizzes, and certificates.
+                </p>
+                <button onclick="closeUpgradeSuccess()" class="btn btn-secondary" style="width: 100%;">Let's Learn</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const isPremium = localStorage.getItem("is_premium") === "true";
+            const profileAction = document.getElementById("profile-membership-action");
+
+            if (isPremium) {
+                profileAction.innerHTML = `<span class="nav-badge-premium" style="padding: 8px 16px; font-size: 13px;"><i class="fa-solid fa-crown"></i> Premium Pro Member</span>`;
+            } else {
+                profileAction.innerHTML = `
+                    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+                        <span class="nav-badge-free" style="padding: 8px 16px; font-size: 13px;">Free Starter Tier</span>
+                        <button onclick="openUpgradeModal()" class="btn btn-premium btn-sm"><i class="fa-solid fa-gem"></i> Go Premium</button>
+                    </div>
+                `;
+            }
+
+            // Sync interests from localStorage
+            const interests = JSON.parse(localStorage.getItem("profile_interests") || "[]");
+            document.querySelectorAll('.interest-checkbox').forEach(cb => {
+                cb.checked = interests.includes(cb.value);
+            });
+
+            renderDashboardMetrics();
+        });
+
+        function updateInterestsStatic() {
+            const selected = [];
+            document.querySelectorAll('.interest-checkbox').forEach(cb => {
+                if (cb.checked) {
+                    selected.push(cb.value);
+                }
+            });
+            localStorage.setItem("profile_interests", JSON.stringify(selected));
+            renderDashboardMetrics();
+        }
+
+        function renderDashboardMetrics() {
+            const enrolled = JSON.parse(localStorage.getItem("enrolled_courses") || "{}");
+            const quizzes = JSON.parse(localStorage.getItem("completed_quizzes") || "{}");
+            
+            let enrolledCount = 0;
+            let totalCompletedLessons = 0;
+            let certificatesCount = 0;
+
+            const progressList = document.getElementById("dashboard-enrolled-list");
+            const certList = document.getElementById("dashboard-certificates-list");
+
+            progressList.innerHTML = "";
+            certList.innerHTML = "";
+
+            const certsHTML = [];
+            const coursesHTML = [];
+            const completedCourseIds = Object.keys(enrolled);
+
+            for (const cId in enrolled) {
+                const course = COURSES_DB[cId];
+                if (!course) continue;
+
+                enrolledCount++;
+                const completedList = enrolled[cId];
+                const completedCount = completedList.length;
+                const totalLessons = course.lessons.length;
+                
+                totalCompletedLessons += completedCount;
+                
+                const progressPercent = totalLessons > 0 ? Math.floor((completedCount / totalLessons) * 100) : 0;
+                const isFinished = progressPercent === 100;
+
+                if (isFinished) {
+                    certificatesCount++;
+                    certsHTML.push(`
+                        <div class="cert-card">
+                            <i class="fa-solid fa-certificate"></i>
+                            <h4 style="font-size: 15px; margin-bottom: 4px;">${course.title}</h4>
+                            <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 12px;">Verified Course Completion</p>
+                            <div style="background: rgba(255, 255, 255, 0.03); border: var(--glass-border); border-radius: 6px; padding: 8px; font-size: 11px; font-family: monospace; color: var(--accent-premium);">
+                                ID: AAC-${course.id.toUpperCase()}-2026
+                            </div>
+                        </div>
+                    `);
+                }
+
+                const badge = isFinished 
+                    ? `<span class="certificate-badge"><i class="fa-solid fa-award"></i> Completed</span>`
+                    : `<span style="font-size: 13px; color: var(--text-secondary);">${completedCount} of ${totalLessons} Units</span>`;
+
+                const actionBtn = isFinished
+                    ? `<a href="course_detail.html?course=${course.id}&lesson=${course.lessons[0].id}" class="btn btn-secondary btn-sm">Review Syllabus</a>`
+                    : `<a href="course_detail.html?course=${course.id}&lesson=${course.lessons[completedCount % totalLessons].id}" class="btn btn-primary btn-sm">Resume Syllabus <i class="fa-solid fa-play" style="font-size: 10px; margin-left: 4px;"></i></a>`;
+
+                coursesHTML.push(`
+                    <div class="enrolled-item animate-fade">
+                        <div class="enrolled-header">
+                            <div>
+                                <span class="course-category" style="margin-bottom: 4px; display: inline-block;">${course.category}</span>
+                                <h4 style="font-size: 18px;">${course.title}</h4>
+                            </div>
+                            ${badge}
+                        </div>
+                        <div class="enrolled-progress-container">
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill ${isFinished ? 'finished' : ''}" style="width: ${progressPercent}%;"></div>
+                            </div>
+                            <span style="font-size: 13px; font-weight: 600; min-width: 36px; text-align: right;">${progressPercent}%</span>
+                        </div>
+                        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px;">
+                            ${actionBtn}
+                        </div>
+                    </div>
+                `);
+            }
+
+            // Write counters
+            document.getElementById("metric-enrolled").innerText = enrolledCount;
+            document.getElementById("metric-finished").innerText = totalCompletedLessons;
+            document.getElementById("metric-quizzes").innerText = Object.keys(quizzes).length;
+            document.getElementById("metric-certificates").innerText = certificatesCount;
+
+            // Inject lists
+            if (enrolledCount > 0) {
+                progressList.innerHTML = coursesHTML.join("");
+            } else {
+                progressList.innerHTML = `
+                    <div style="background: var(--bg-secondary); border: var(--glass-border); padding: 48px; border-radius: 12px; text-align: center;">
+                        <i class="fa-solid fa-book-open" style="font-size: 40px; color: var(--text-muted); margin-bottom: 16px;"></i>
+                        <h4 style="font-size: 18px; margin-bottom: 8px;">No Enrolled Courses</h4>
+                        <p style="color: var(--text-secondary); font-size: 14px; max-width: 320px; margin: 0 auto 20px auto;">
+                            You haven't started learning any tracks yet. Explore our curriculum to begin.
+                        </p>
+                        <a href="courses.html" class="btn btn-primary btn-sm">Explore Courses</a>
+                    </div>
+                `;
+            }
+
+            if (certificatesCount > 0) {
+                certList.innerHTML = certsHTML.join("");
+            } else {
+                certList.innerHTML = `
+                    <div style="text-align: center; padding: 32px 0;">
+                        <i class="fa-solid fa-certificate" style="font-size: 48px; color: var(--text-muted); opacity: 0.3; margin-bottom: 12px;"></i>
+                        <h4 style="font-size: 15px; color: var(--text-secondary); margin-bottom: 6px;">No Certificates Yet</h4>
+                        <p style="font-size: 12px; color: var(--text-muted); line-height: 1.4;">
+                            Complete 100% of all lessons in any course track to unlock your verified AI graduation credentials.
+                        </p>
+                    </div>
+                `;
+            }
+
+            // Render AI Course Recommendations
+            const interestTags = JSON.parse(localStorage.getItem("profile_interests") || "[]");
+            const recommendations = getRecommendations(completedCourseIds, interestTags);
+            const recsGrid = document.getElementById("recommendations-grid");
+            
+            if (recommendations.length > 0) {
+                recsGrid.style.display = "grid";
+                recsGrid.innerHTML = "";
+                const isPremiumUser = localStorage.getItem("is_premium") === "true";
+                
+                recommendations.forEach(course => {
+                    let badgeHTML = course.is_premium 
+                        ? `<span class="course-badge-premium" style="top: 8px; right: 8px; font-size: 10px; padding: 2px 8px;"><i class="fa-solid fa-crown"></i> Premium</span>`
+                        : `<span class="course-badge-free" style="top: 8px; right: 8px; font-size: 10px; padding: 2px 8px;">Free</span>`;
+                        
+                    let iconClass = "fa-solid fa-briefcase";
+                    if (course.id.includes("python")) {
+                        iconClass = "fa-brands fa-python";
+                    } else if (course.id.includes("ai") || course.id.includes("deep")) {
+                        iconClass = "fa-solid fa-microchip";
+                    } else if (course.id.includes("design") || course.id.includes("figma")) {
+                        iconClass = "fa-solid fa-palette";
+                    }
+                    
+                    let footerHTML = "";
+                    if (course.is_premium && !isPremiumUser) {
+                        footerHTML = `<button onclick="openUpgradeModal()" class="btn btn-secondary btn-sm" style="width: 100%;"><i class="fa-solid fa-lock"></i> Unlock</button>`;
+                    } else {
+                        footerHTML = `<a href="course_detail.html?course=${course.id}" class="btn btn-primary btn-sm" style="width: 100%;">Enroll Now</a>`;
+                    }
+                    
+                    recsGrid.innerHTML += `
+                        <div class="course-card" style="box-shadow: 0 4px 15px rgba(0,0,0,0.4);">
+                            <div class="course-banner" style="height: 100px;">
+                                ${badgeHTML}
+                                <i class="${iconClass}" style="font-size: 32px;"></i>
+                            </div>
+                            <div class="course-body" style="padding: 16px;">
+                                <span class="course-category" style="font-size: 10px;">${course.category}</span>
+                                <h4 style="font-size: 15px; margin-bottom: 6px; line-height: 1.2;">${course.title}</h4>
+                                <p style="font-size: 12px; margin-bottom: 12px; line-height: 1.4; -webkit-line-clamp: 2;">${course.short_desc}</p>
+                            </div>
+                            <div class="course-footer" style="padding: 0 16px 16px 16px;">
+                                ${footerHTML}
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                recsGrid.style.display = "block";
+                recsGrid.innerHTML = `
+                    <div style="background: rgba(255, 255, 255, 0.02); border: var(--glass-border); border-radius: 8px; padding: 20px; text-align: center; margin-top: 16px; width: 100%;">
+                        <p style="color: var(--text-secondary); font-size: 13px;">No new recommendations available. You have enrolled in all matching tracks!</p>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

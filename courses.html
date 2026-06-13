@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Catalog - Courseverse</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎓</text></svg>">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-graduation-cap"></i> Courseverse
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="courses.html" class="nav-link active">Courses</a></li>
+                <li><a href="subscription.html" class="nav-link">Subscription</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <form action="courses.html" method="GET" class="nav-search" onsubmit="triggerSearch(event)">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="nav-search-input" placeholder="Search courses...">
+                </form>
+
+                <!-- Membership status & Action -->
+                <div id="nav-membership-section" class="nav-actions">
+                    <!-- Injected dynamically by main.js -->
+                </div>
+
+                <a href="dashboard.html" class="profile-avatar" style="width: 38px; height: 38px; font-size: 14px;">R</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="container" style="padding: 60px 24px;">
+            <!-- Catalog Header -->
+            <div style="margin-bottom: 40px; text-align: left;" class="animate-fade">
+                <h1 style="font-size: 36px; margin-bottom: 8px;">Explore Our Catalog</h1>
+                <p style="color: var(--text-secondary); max-width: 600px;">
+                    Choose from industry-expert curriculum streams. Every course is equipped with real-time AI Study Companions and automated concept checkers.
+                </p>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="filter-bar animate-fade" style="animation-delay: 0.1s;">
+                <div class="filter-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="search-input" placeholder="Search by course title or description..." oninput="filterCatalog()">
+                </div>
+
+                <div class="filter-groups">
+                    <!-- Category Selector -->
+                    <select class="filter-select" id="category-select" onchange="filterCatalog()">
+                        <option value="all">All Subjects</option>
+                        <option value="coding">Coding</option>
+                        <option value="ai">Artificial Intelligence</option>
+                        <option value="design">UI/UX Design</option>
+                    </select>
+
+                    <!-- Access Tier Selector -->
+                    <select class="filter-select" id="access-select" onchange="filterCatalog()">
+                        <option value="all">All Access</option>
+                        <option value="free">Free Courses</option>
+                        <option value="premium">Premium Only</option>
+                    </select>
+
+                    <button onclick="clearCatalogFilters()" class="btn btn-secondary btn-sm" style="height: 42px;">Clear</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Courses Container -->
+            <div class="course-grid-container" style="padding: 0;">
+                <div class="course-grid" id="catalog-grid">
+                    <!-- Dynamic rendering by script -->
+                </div>
+                
+                <div id="catalog-empty-state" style="display: none; text-align: center; padding: 80px 24px; background: var(--bg-secondary); border-radius: 16px; border: var(--glass-border);">
+                    <i class="fa-solid fa-graduation-cap" style="font-size: 56px; color: var(--text-muted); margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 22px; margin-bottom: 8px;">No Courses Found</h3>
+                    <p style="color: var(--text-secondary); max-width: 400px; margin: 0 auto 24px auto;">
+                        We couldn't find any courses matching your search criteria. Try modifying your filters or terms.
+                    </p>
+                    <button onclick="clearCatalogFilters()" class="btn btn-primary">Reset Catalog Search</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Unified Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div>
+                <p>&copy; 2024 Courseverse. Built by Ria Chawak. Powered by Artificial Intelligence.</p>
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Designed for maximum visual and educational impact.</p>
+            </div>
+            <div class="footer-links">
+                <a href="courses.html">Browse Catalog</a>
+                <a href="subscription.html">Upgrade Membership</a>
+                <a href="#" onclick="resetSubscription(event)" style="color: var(--error);"><i class="fa-solid fa-arrows-rotate"></i> Reset State</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Universal Checkout Upgrade Modal -->
+    <div id="checkout-modal" class="modal-overlay">
+        <div class="modal-box">
+            <button onclick="closeUpgradeModal()" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div id="checkout-modal-form">
+                <div class="modal-header">
+                    <i class="fa-solid fa-gem"></i>
+                    <h2>Upgrade to Courseverse Premium</h2>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-top: 6px;">Unlock all AI features, certificate tracks, and premium syllabus details.</p>
+                </div>
+
+                <div class="checkout-details">
+                    <div class="detail-row">
+                        <span>Plan Type</span>
+                        <span style="font-weight: 600;">Premium Pro Membership</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Duration</span>
+                        <span>Monthly Recurring</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Price</span>
+                        <span style="color: var(--accent-premium); font-weight: 700;">$19.99 / mo</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <button onclick="confirmUpgrade(event)" class="btn btn-premium btn-lg" style="width: 100%;">
+                        <i class="fa-solid fa-lock-open"></i> Secure Unlock Now
+                    </button>
+                    <p style="font-size: 11px; text-align: center; color: var(--text-muted);">
+                        This is a simulated secure check-out. Clicking will instantly upgrade your session locally.
+                    </p>
+                </div>
+            </div>
+
+            <div id="checkout-success-view" class="upgrade-success-anim">
+                <i class="fa-solid fa-circle-check animate-fade"></i>
+                <h2>Welcome to Premium!</h2>
+                <p style="color: var(--text-secondary); margin-top: 10px; font-size: 14px; margin-bottom: 24px;">
+                    Your account has been upgraded. You now have full access to all interactive AI tutors, quizzes, and certificates.
+                </p>
+                <button onclick="closeUpgradeSuccess()" class="btn btn-secondary" style="width: 100%;">Let's Learn</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Check if search query was passed via URL parameter from header
+            const params = new URLSearchParams(window.location.search);
+            const searchParam = params.get("search");
+            if (searchParam) {
+                document.getElementById("search-input").value = searchParam;
+                document.getElementById("nav-search-input").value = searchParam;
+            }
+            filterCatalog();
+        });
+
+        function triggerSearch(e) {
+            e.preventDefault();
+            const val = document.getElementById("nav-search-input").value;
+            document.getElementById("search-input").value = val;
+            filterCatalog();
+        }
+
+        function filterCatalog() {
+            const query = document.getElementById("search-input").value.toLowerCase().trim();
+            const category = document.getElementById("category-select").value.toLowerCase();
+            const access = document.getElementById("access-select").value.toLowerCase();
+            const isPremium = localStorage.getItem("is_premium") === "true";
+
+            const grid = document.getElementById("catalog-grid");
+            const emptyState = document.getElementById("catalog-empty-state");
+            grid.innerHTML = "";
+
+            let count = 0;
+
+            for (const cId in COURSES_DB) {
+                const c = COURSES_DB[cId];
+
+                // Search query match
+                if (query && !c.title.toLowerCase().includes(query) && !c.short_desc.toLowerCase().includes(query)) {
+                    continue;
+                }
+                // Category match
+                if (category !== "all" && c.category.toLowerCase() !== category) {
+                    continue;
+                }
+                // Access match
+                if (access === "free" && c.is_premium) {
+                    continue;
+                }
+                if (access === "premium" && !c.is_premium) {
+                    continue;
+                }
+
+                count++;
+
+                // Build HTML
+                const card = document.createElement("div");
+                card.className = "course-card animate-fade";
+
+                let iconClass = "fa-solid fa-palette";
+                if (c.id.includes("python")) iconClass = "fa-brands fa-python";
+                else if (c.id.includes("ai")) iconClass = "fa-solid fa-microchip";
+
+                const badge = c.is_premium 
+                    ? `<span class="course-badge-premium"><i class="fa-solid fa-crown"></i> Premium</span>`
+                    : `<span class="course-badge-free">Free</span>`;
+
+                const footerBtn = (c.is_premium && !isPremium)
+                    ? `<button onclick="openUpgradeModal()" class="btn btn-secondary"><i class="fa-solid fa-lock"></i> Unlock Premium</button>`
+                    : `<a href="course_detail.html?course=${c.id}&lesson=${c.lessons[0].id}" class="btn btn-primary">Start Learning</a>`;
+
+                card.innerHTML = `
+                    <div class="course-banner">
+                        ${badge}
+                        <i class="${iconClass}"></i>
+                    </div>
+                    <div class="course-body">
+                        <span class="course-category">${c.category}</span>
+                        <h3>${c.title}</h3>
+                        <p>${c.short_desc}</p>
+                        <div class="course-meta">
+                            <span><i class="fa-solid fa-clock"></i> ${c.duration}</span>
+                            <span><i class="fa-solid fa-layer-group"></i> ${c.level}</span>
+                        </div>
+                    </div>
+                    <div class="course-footer">
+                        ${footerBtn}
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            }
+
+            if (count === 0) {
+                grid.style.display = "none";
+                emptyState.style.display = "block";
+            } else {
+                grid.style.display = "grid";
+                emptyState.style.display = "none";
+            }
+        }
+
+        function clearCatalogFilters() {
+            document.getElementById("search-input").value = "";
+            document.getElementById("nav-search-input").value = "";
+            document.getElementById("category-select").value = "all";
+            document.getElementById("access-select").value = "all";
+            filterCatalog();
+        }
+    </script>
+</body>
+</html>

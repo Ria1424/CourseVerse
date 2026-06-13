@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership Plans - Courseverse</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎓</text></svg>">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-graduation-cap"></i> Courseverse
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="courses.html" class="nav-link">Courses</a></li>
+                <li><a href="subscription.html" class="nav-link active">Subscription</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <form action="courses.html" method="GET" class="nav-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" name="search" placeholder="Search courses...">
+                </form>
+
+                <!-- Membership status & Action -->
+                <div id="nav-membership-section" class="nav-actions">
+                    <!-- Injected dynamically by main.js -->
+                </div>
+
+                <a href="dashboard.html" class="profile-avatar" style="width: 38px; height: 38px; font-size: 14px;">R</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="container pricing-container">
+            
+            <!-- Locked course warning banner (populated dynamically if URL has parameter ?required_course=xxx) -->
+            <div id="required-course-banner" style="display: none; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 12px; padding: 16px; margin-bottom: 40px; align-items: center; gap: 16px;" class="animate-fade">
+                <i class="fa-solid fa-lock" style="color: var(--accent-premium); font-size: 24px;"></i>
+                <div>
+                    <strong style="color: var(--text-primary);">Premium Course Locked</strong>
+                    <p style="font-size: 14px; color: var(--text-secondary); margin-top: 2px;">
+                        The course <strong id="locked-course-title">"AI Foundations"</strong> is reserved for Premium subscribers. Please upgrade your tier below to unlock access instantly.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Pricing Header -->
+            <div class="section-header animate-fade">
+                <h1 style="font-size: 36px; margin-bottom: 8px;">Flexible Pricing for Fast Learners</h1>
+                <p>Choose the model that fits your study needs. Upgrade or cancel anytime.</p>
+            </div>
+
+            <!-- Pricing Grid -->
+            <div class="pricing-grid animate-fade" style="animation-delay: 0.1s;">
+                
+                <!-- Free Tier Card -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Free Starter</h3>
+                        <div class="pricing-price">$0 <span>/ month</span></div>
+                        <p class="pricing-desc">Explore the fundamentals with access to our foundational courses.</p>
+                    </div>
+
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-circle-check"></i> Access to all Free designated courses</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Foundational coding modules</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Basic profile and dashboard</li>
+                        <li style="color: var(--text-muted);"><i class="fa-solid fa-circle-xmark" style="color: var(--text-muted);"></i> No AI Chat Study Companion</li>
+                        <li style="color: var(--text-muted);"><i class="fa-solid fa-circle-xmark" style="color: var(--text-muted);"></i> No AI Quiz Generator</li>
+                        <li style="color: var(--text-muted);"><i class="fa-solid fa-circle-xmark" style="color: var(--text-muted);"></i> No Completion Certificates</li>
+                    </ul>
+
+                    <div id="free-plan-btn-container">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Premium Tier Card -->
+                <div class="pricing-card premium-tier">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title" style="color: var(--accent-premium);">Premium Pro</h3>
+                        <div class="pricing-price">$19.99 <span>/ month</span></div>
+                        <p class="pricing-desc">Accelerate your education with unlimited AI tutors and certificates.</p>
+                    </div>
+
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-circle-check" style="color: var(--accent-premium);"></i> Full access to all Free & Premium courses</li>
+                        <li><i class="fa-solid fa-circle-check" style="color: var(--accent-premium);"></i> 24/7 Contextual AI Study Companion</li>
+                        <li><i class="fa-solid fa-circle-check" style="color: var(--accent-premium);"></i> Dynamic AI Quiz Generator & Explanations</li>
+                        <li><i class="fa-solid fa-circle-check" style="color: var(--accent-premium);"></i> Verified PDF certificates upon completion</li>
+                        <li><i class="fa-solid fa-circle-check" style="color: var(--accent-premium);"></i> Priority syllabus request features</li>
+                    </ul>
+
+                    <div id="premium-plan-btn-container">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQs -->
+            <div style="margin-top: 80px;" class="animate-fade" style="animation-delay: 0.25s;">
+                <h2 style="text-align: center; font-size: 24px; margin-bottom: 40px;">Subscription FAQs</h2>
+                <div style="display: grid; grid-template-columns: 1fr; gap: 24px; max-width: 768px; margin: 0 auto;">
+                    <div style="background: rgba(255, 255, 255, 0.02); border: var(--glass-border); padding: 20px; border-radius: 10px;">
+                        <h4 style="font-size: 16px; margin-bottom: 8px;"><i class="fa-solid fa-circle-question" style="color: var(--accent-cyan); margin-right: 6px;"></i> How does the AI Tutor work?</h4>
+                        <p style="font-size: 14px; color: var(--text-secondary);">
+                            Our AI Study Companion reads the lesson transcripts, summaries, and code blocks for the course you are currently studying. It gives precise, tailored explanations rather than generic chat responses.
+                        </p>
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.02); border: var(--glass-border); padding: 20px; border-radius: 10px;">
+                        <h4 style="font-size: 16px; margin-bottom: 8px;"><i class="fa-solid fa-circle-question" style="color: var(--accent-cyan); margin-right: 6px;"></i> Can I cancel my subscription?</h4>
+                        <p style="font-size: 14px; color: var(--text-secondary);">
+                            Yes, you can upgrade and downgrade your subscription tier instantly. There are no locking contracts, and you can switch back to the Free plan at any time.
+                        </p>
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.02); border: var(--glass-border); padding: 20px; border-radius: 10px;">
+                        <h4 style="font-size: 16px; margin-bottom: 8px;"><i class="fa-solid fa-circle-question" style="color: var(--accent-cyan); margin-right: 6px;"></i> Are the certificates verified?</h4>
+                        <p style="font-size: 14px; color: var(--text-secondary);">
+                            Every certificate earned has a unique credential tag tracked in our database. When you complete a course, it automatically populates on your dashboard, showing your achievement level and date.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Unified Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div>
+                <p>&copy; 2024 Courseverse. Built by Ria Chawak. Powered by Artificial Intelligence.</p>
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Designed for maximum visual and educational impact.</p>
+            </div>
+            <div class="footer-links">
+                <a href="courses.html">Browse Catalog</a>
+                <a href="subscription.html">Upgrade Membership</a>
+                <a href="#" onclick="resetSubscription(event)" style="color: var(--error);"><i class="fa-solid fa-arrows-rotate"></i> Reset State</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Universal Checkout Upgrade Modal -->
+    <div id="checkout-modal" class="modal-overlay">
+        <div class="modal-box">
+            <button onclick="closeUpgradeModal()" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div id="checkout-modal-form">
+                <div class="modal-header">
+                    <i class="fa-solid fa-gem"></i>
+                    <h2>Upgrade to Courseverse Premium</h2>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-top: 6px;">Unlock all AI features, certificate tracks, and premium syllabus details.</p>
+                </div>
+
+                <div class="checkout-details">
+                    <div class="detail-row">
+                        <span>Plan Type</span>
+                        <span style="font-weight: 600;">Premium Pro Membership</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Duration</span>
+                        <span>Monthly Recurring</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Price</span>
+                        <span style="color: var(--accent-premium); font-weight: 700;">$19.99 / mo</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <button onclick="confirmUpgrade(event)" class="btn btn-premium btn-lg" style="width: 100%;">
+                        <i class="fa-solid fa-lock-open"></i> Secure Unlock Now
+                    </button>
+                    <p style="font-size: 11px; text-align: center; color: var(--text-muted);">
+                        This is a simulated secure check-out. Clicking will instantly upgrade your session locally.
+                    </p>
+                </div>
+            </div>
+
+            <div id="checkout-success-view" class="upgrade-success-anim">
+                <i class="fa-solid fa-circle-check animate-fade"></i>
+                <h2>Welcome to Premium!</h2>
+                <p style="color: var(--text-secondary); margin-top: 10px; font-size: 14px; margin-bottom: 24px;">
+                    Your account has been upgraded. You now have full access to all interactive AI tutors, quizzes, and certificates.
+                </p>
+                <button onclick="closeUpgradeSuccess()" class="btn btn-secondary" style="width: 100%;">Let's Learn</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const reqCourse = params.get("required_course");
+            
+            if (reqCourse && COURSES_DB[reqCourse]) {
+                document.getElementById("locked-course-title").innerText = `"${COURSES_DB[reqCourse].title}"`;
+                document.getElementById("required-course-banner").style.display = "flex";
+            }
+
+            const isPremium = localStorage.getItem("is_premium") === "true";
+            const freeBtnContainer = document.getElementById("free-plan-btn-container");
+            const premBtnContainer = document.getElementById("premium-plan-btn-container");
+
+            if (isPremium) {
+                freeBtnContainer.innerHTML = `<button onclick="downgradeSubscription(event)" class="btn btn-danger btn-sm" style="width: 100%;">Downgrade to Starter</button>`;
+                premBtnContainer.innerHTML = `<button disabled class="btn btn-premium" style="width: 100%; cursor: default; background: var(--success); color: white; box-shadow: none;">Active Premium Member</button>`;
+            } else {
+                freeBtnContainer.innerHTML = `<button disabled class="btn btn-secondary" style="width: 100%; cursor: default;">Current Plan</button>`;
+                premBtnContainer.innerHTML = `<button onclick="openUpgradeModal()" class="btn btn-premium btn-lg" style="width: 100%;">Upgrade to Pro</button>`;
+            }
+        });
+    </script>
+</body>
+</html>
