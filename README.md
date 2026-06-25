@@ -1,6 +1,6 @@
 # 🎓 Courseverse - AI-Powered E-Learning Platform
 
-Live Demo Link: **[https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/](https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/)**
+Live Demo Link: **[https://ria1424.github.io/CourseVerse/](https://ria1424.github.io/CourseVerse/)**
 *(Note: Replace `YOUR-USERNAME` and `YOUR-REPO-NAME` with your actual GitHub details after deploying!)*
 
 ---
